@@ -14,25 +14,26 @@ app = Flask(__name__)
 dbconn = None
 connection = None
 
+
 def getCursor():
     global dbconn
     global connection
-    connection = mysql.connector.connect(user=connect.dbuser, \
-    password=connect.dbpass, host=connect.dbhost, \
-    database=connect.dbname, autocommit=True)
+    connection = mysql.connector.connect(user=connect.dbuser,
+                                         password=connect.dbpass, host=connect.dbhost,
+                                         database=connect.dbname, autocommit=True)
     dbconn = connection.cursor()
     return dbconn
+
 
 @app.route("/")
 def home():
     return redirect("/currentjobs")
 
+
 @app.route("/currentjobs")
 def currentjobs():
     connection = getCursor()
-    connection.execute("SELECT job_id,customer,job_date FROM job where completed=0;")
+    connection.execute(
+        "SELECT job.job_id, customer.first_name, customer.family_name, job.job_date FROM job INNER JOIN customer ON job.customer = customer.customer_id WHERE job.completed = 0;")
     jobList = connection.fetchall()
-    return render_template("currentjoblist.html", job_list = jobList)    
-
-
-
+    return render_template("currentjoblist.html", job_list=jobList)
