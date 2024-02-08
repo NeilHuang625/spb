@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Job Detail</h2>
+    <table>
+        <tr>
+            <th>Job ID: </th>
+            <td>{{ job_details[0] }}</td>
+        </tr>
+        <tr>
+            <th>Parts: </th>
+            <td>{{ job_details[1] }}</td>
+        </tr>
+        <tr>
+            <th>Services: </th>
+            <td>{{ job_details[2] }}</td>
+        </tr>
+    </table>
+    
+    <h2>Add Parts</h2>
+    <form action="" method="POST">
+        <label for="part">Part:</label>
+        <select name="part" id="part">
+            {% for part in parts %}
+                <option value="{{ part[0] }}">{{ part[1] }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <label for="part_qty">Quantity:</label>
+        <input type="number" name="part_qty" id="part_qty" min="1" required>
+        <br>
+        <input type="submit" value="Add Part">
+    </form>
+
+    <h2>Add Services</h2>
+    <form action="" method="POST">
+        <label for="service">Service:</label>
+        <select name="service" id="service">
+            {% for service in services %}
+                <option value="{{ service[0] }}">{{ service[1] }}</option>
+            {% endfor %}
+        </select>
+        <label for="service_qty">Service Quantity:</label>
+        <input type="number" name="service_qty" id="service_qty" min="1" required>
+        <input type="submit" value="Add Service">
+    </form>
+{% endblock %}
