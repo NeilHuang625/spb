@@ -42,7 +42,15 @@ def currentjobs():
 @app.route("/jobdetails/<job_id>", methods=["GET", "POST"])
 def jobdetails(job_id):
     connection = getCursor()
+
+    # Fetch job status
+    connection.execute(
+        "SELECT completed FROM job WHERE job_id = %s", (job_id,))
+    completed = connection.fetchone()[0]
+
     if request.method == "POST":
+
+        # Handle part form submission
         if "part" in request.form:
             part_id = request.form["part"]
             part_qty = request.form["part_qty"]
@@ -72,6 +80,7 @@ def jobdetails(job_id):
                     part_qty), job_id)
             )
 
+        # Handle service form submission
         elif "service" in request.form:
             service_id = request.form["service"]
             service_qty = request.form["service_qty"]
@@ -101,6 +110,13 @@ def jobdetails(job_id):
                 "UPDATE job SET total_cost = COALESCE(total_cost, 0) + %s WHERE job_id = %s", (
                     service_cost * int(service_qty), job_id)
             )
+
+        # Handle job completion form submission
+        elif "complete" in request.form:
+            # Update job completion status to 1 and calculate job total cost
+            connection.execute(
+                "UPDATE job SET completed = 1 WHERE job_id = %s", (job_id,))
+
         return redirect(url_for('jobdetails', job_id=job_id))
 
     # Fetch job details based on job_id
@@ -109,7 +125,8 @@ def jobdetails(job_id):
         SELECT 
             job.job_id, 
             GROUP_CONCAT(DISTINCT part.part_name, " ( qty: ", job_part.qty, " ) ") as parts,
-            GROUP_CONCAT(DISTINCT service.service_name, " ( qty: ", job_service.qty, " ) ") as services
+            GROUP_CONCAT(DISTINCT service.service_name, " ( qty: ", job_service.qty, " ) ") as services,
+            job.total_cost
         FROM 
             job 
         INNER JOIN 
@@ -136,4 +153,4 @@ def jobdetails(job_id):
     connection.execute("SELECT service_id, service_name FROM service")
     services = connection.fetchall()
 
-    return render_template("job_details.html", job_details=jobDetails, parts=parts, services=services)
+    return render_template("job_details.html", job_details=jobDetails, parts=parts, services=services, completed=completed)

@@ -17,31 +17,44 @@
         </tr>
     </table>
     
+    {% set disable = "disabled" if completed == 1 else "" %}
+
     <h2>Add Parts</h2>
     <form action="" method="POST">
         <label for="part">Part:</label>
-        <select name="part" id="part">
+        <select name="part" id="part" {{ disable }} >
             {% for part in parts %}
                 <option value="{{ part[0] }}">{{ part[1] }}</option>
             {% endfor %}
         </select>
         <br>
         <label for="part_qty">Quantity:</label>
-        <input type="number" name="part_qty" id="part_qty" min="1" required>
+        <input type="number" name="part_qty" id="part_qty" min="1" {{ disable }} required>
         <br>
-        <input type="submit" value="Add Part">
+        <input type="submit" value="Add Part" {{ disable }} >
     </form>
 
     <h2>Add Services</h2>
     <form action="" method="POST">
         <label for="service">Service:</label>
-        <select name="service" id="service">
+        <select name="service" id="service" {{ disable }}>
             {% for service in services %}
                 <option value="{{ service[0] }}">{{ service[1] }}</option>
             {% endfor %}
         </select>
         <label for="service_qty">Service Quantity:</label>
-        <input type="number" name="service_qty" id="service_qty" min="1" required>
-        <input type="submit" value="Add Service">
+        <input type="number" name="service_qty" id="service_qty" min="1" {{ disable }} required>
+        <input type="submit" value="Add Service" {{ disable }} >
     </form>
+
+    <!-- Add a form to mark the job as complete -->
+    <form action="" method="POST">
+        <input type="submit" name="complete" value="Mark as Complete" {{ disable }} >
+    </form>
+
+    {% if completed == 1 %}
+        <h3>Job completed, cannot be modified.</h3>
+        <h3>Total Cost: ${{ job_details[3] }}</h3>
+    {% endif %}
+
 {% endblock %}
