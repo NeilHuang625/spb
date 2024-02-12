@@ -1,62 +1,74 @@
 {% extends 'base.html' %}
 {% block title %}Job Detail{% endblock %}
-{% block header %}Job Detail{% endblock %}
 
 {% block content %}
-    <h2>Job Detail</h2>
-    <table>
-        <tr>
-            <th>Job ID: </th>
-            <td>{{ job_details[0] }}</td>
-        </tr>
-        <tr>
-            <th>Parts: </th>
-            <td>{{ job_details[1] }}</td>
-        </tr>
-        <tr>
-            <th>Services: </th>
-            <td>{{ job_details[2] }}</td>
-        </tr>
-    </table>
-    
+<div class="container">
+    <h2 class="mb-3">Job Detail</h2>
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <tbody>
+                <tr>
+                    <th scope="row">Job ID: </th>
+                    <td>{{ job_details[0] }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Parts: </th>
+                    <td>{{ job_details[1] }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Services: </th>
+                    <td>{{ job_details[2] }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
     {% set disable = "disabled" if completed == 1 else "" %}
 
-    <h2>Add Parts</h2>
-    <form action="" method="POST">
-        <label for="part">Part:</label>
-        <select name="part" id="part" {{ disable }} >
-            {% for part in parts %}
-                <option value="{{ part[0] }}">{{ part[1] }}</option>
-            {% endfor %}
-        </select>
-        <br>
-        <label for="part_qty">Quantity:</label>
-        <input type="number" name="part_qty" id="part_qty" min="1" {{ disable }} required>
-        <br>
-        <input type="submit" value="Add Part" {{ disable }} >
+    <h2 class="mt-4">Add Parts</h2>
+    <form action="" method="POST" class="mb-3">
+        <div class="mb-3">
+            <label for="part" class="form-label">Part:</label>
+            <select name="part" id="part" class="form-select" {{ disable }}>
+                {% for part in parts %}
+                    <option value="{{ part[0] }}">{{ part[1] }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="part_qty" class="form-label">Quantity:</label>
+            <input type="number" name="part_qty" id="part_qty" min="1" class="form-control" {{ disable }} required>
+        </div>
+        <button type="submit" class="btn btn-primary" {{ disable }}>Add Part</button>
     </form>
 
-    <h2>Add Services</h2>
-    <form action="" method="POST">
-        <label for="service">Service:</label>
-        <select name="service" id="service" {{ disable }}>
-            {% for service in services %}
-                <option value="{{ service[0] }}">{{ service[1] }}</option>
-            {% endfor %}
-        </select>
-        <label for="service_qty">Service Quantity:</label>
-        <input type="number" name="service_qty" id="service_qty" min="1" {{ disable }} required>
-        <input type="submit" value="Add Service" {{ disable }} >
+    <h2 class="mt-4">Add Services</h2>
+    <form action="" method="POST" class="mb-3">
+        <div class="mb-3">
+            <label for="service" class="form-label">Service:</label>
+            <select name="service" id="service" class="form-select" {{ disable }}>
+                {% for service in services %}
+                    <option value="{{ service[0] }}">{{ service[1] }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="service_qty" class="form-label">Service Quantity:</label>
+            <input type="number" name="service_qty" id="service_qty" min="1" class="form-control" {{ disable }} required>
+        </div>
+        <button type="submit" class="btn btn-primary" {{ disable }}>Add Service</button>
     </form>
 
     <!-- Add a form to mark the job as complete -->
-    <form action="" method="POST">
-        <input type="submit" name="complete" value="Marked as Completed" {{ disable }} >
+    <form action="" method="POST" class="mb-3">
+        <button type="submit" name="complete" class="btn btn-success" {{ disable }}>Marked as Completed</button>
     </form>
 
     {% if completed == 1 %}
-        <h3>Job completed, cannot be modified.</h3>
-        <h3>Total Cost: ${{ job_details[3] }}</h3>
+        <div class="alert alert-info" role="alert">
+            <h4 class="alert-heading">Job completed, cannot be modified.</h4>
+            <p>Total Cost: ${{ job_details[3] }}</p>
+        </div>
     {% endif %}
-
+</div>
 {% endblock %}

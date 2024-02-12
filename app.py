@@ -268,9 +268,8 @@ def unpaidBills():
         return redirect("/admin/unpaidBills")
 
     # Fetch all unpaid bills, ordered by date and then by customer
-    # Fetch only those bills which have total_cost and are not paid
     connection.execute(
-        "SELECT * FROM job WHERE paid = 0 AND total_cost IS NOT NULL ORDER BY job_date, customer"
+        "SELECT * FROM job WHERE paid = 0 ORDER BY job_date, customer"
     )
     bills = connection.fetchall()
 

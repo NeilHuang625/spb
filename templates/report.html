@@ -1,20 +1,22 @@
 {% extends "admin.html" %}
 {% block title %}Report{% endblock %}
-{% block header %}Report{% endblock %}
 {% block content %}
-    
+<div class="container">
     <!-- initialising the current_customer_id variable to an empty string -->
     {% set ns = namespace(current_customer_id = '')  %}
     {% for bill in bills %}
         <div class="{{ 'text-danger' if bill[3] < days_ago_14 else '' }}">
-        {% if bill[0] != ns.current_customer_id %}
-            <h2>{{ bill[1] }}, {{ bill[2] }}</h2>
-            {% set ns.current_customer_id = bill[0] %}
-        {% endif %}
-            <p>Date: {{ bill[3] }}</p>
-            <p>Amount: {{ bill[4] }}</p>
+            {% if bill[0] != ns.current_customer_id %}
+                <h2 class="mt-4">{{ bill[1] }}, {{ bill[2] }}</h2>
+                {% set ns.current_customer_id = bill[0] %}
+            {% endif %}
+            <div class="card mb-3">
+                <div class="card-body">
+                    <p class="card-text fw-bold {{ 'text-danger' if bill[3] < days_ago_14 else '' }}">Date: {{ bill[3] }}</p>
+                    <p class="card-text fw-bold {{ 'text-danger' if bill[3] < days_ago_14 else '' }}">Amount: {{ bill[4] }}</p>
+                </div>
+            </div>
         </div>
     {% endfor %}
-
+</div>
 {% endblock %}
-```

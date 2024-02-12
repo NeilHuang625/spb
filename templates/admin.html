@@ -8,24 +8,46 @@
     </head>
 
     <body>
-      <nav>
-        <h1>Selwyn Panel Beaters</h1>
-        <ul>
-          <li><a href="{{ url_for('home') }}">Current Jobs</a></li>
-          <li><a href="{{ url_for('admin') }}">Show All Customers</a></li>
-          <li><a href="{{ url_for('partList') }}">Show All Parts</a></li>
-          <li><a href="{{ url_for('serviceList') }}">Show All Services</a></li>
-          <li><a href="{{ url_for('addCustomer') }}">Add Customer</a></li>
-          <li><a href="{{ url_for('addPart') }}">Add Part</a></li>
-          <li><a href="{{ url_for('addService') }}">Add Service</a></li>
-          <li><a href="{{ url_for('unpaidBills') }}">Show Unpaid Bills</a></li>
-          <li><a href="{{ url_for('getBillReport') }}">Show Unpaid Report</a></li>
-        </ul>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Selwyn Panel Beaters</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('home') }}">Current Jobs</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('admin') }}">Show All Customers</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('partList') }}">Show All Parts</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('serviceList') }}">Show All Services</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('addCustomer') }}">Add Customer</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('addPart') }}">Add Part</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('addService') }}">Add Service</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('unpaidBills') }}">Show Unpaid Bills</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('getBillReport') }}">Show Unpaid Report</a>
+              </li>
+            </ul>
+          </div>
+        </div>
       </nav> 
-      <section class="content">
-        <header>
-          {% block header %}admin{% endblock %}
-        </header>
+      <section class="content container mt-4">
         {% block content %}{% endblock %}
       </section>
 

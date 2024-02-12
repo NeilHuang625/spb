@@ -3,18 +3,27 @@
 {% block header %}Service List{% endblock %}
 
 {% block content %}
-<table>
-    <tr>
-        <th>ID</th>
-        <th>Service Name</th>
-        <th>Cost</th>
-    </tr>
-    {% for service in services %}
-        <tr>
-            <td>{{ service[0] }}</td>
-            <td>{{ service[1] }}</td>
-            <td>{{ service[2] }}</td>
-        </tr>
-    {% endfor %}
-</table>
+<div class="container">
+    <h2 class="mb-3">Service List</h2>
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Service Name</th>
+                    <th scope="col">Cost</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for service in services %}
+                    <tr>
+                        <td>{{ service[0] }}</td>
+                        <td>{{ service[1] }}</td>
+                        <td>{{ service[2] }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
 {% endblock %}
