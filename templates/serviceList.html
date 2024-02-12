@@ -1,0 +1,20 @@
+{% extends "admin.html" %}
+{% block title %}Service List{% endblock %}
+{% block header %}Service List{% endblock %}
+
+{% block content %}
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Service Name</th>
+        <th>Cost</th>
+    </tr>
+    {% for service in services %}
+        <tr>
+            <td>{{ service[0] }}</td>
+            <td>{{ service[1] }}</td>
+            <td>{{ service[2] }}</td>
+        </tr>
+    {% endfor %}
+</table>
+{% endblock %}

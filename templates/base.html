@@ -12,15 +12,13 @@
         <h1>Selwyn Panel Beaters</h1>
         <ul>
           <li><a href="{{ url_for('home') }}">Current Jobs</a></li>
+          <li><a href="{{ url_for('admin') }}">Admin</a></li>
         </ul>
       </nav> 
       <section class="content">
         <header>
           {% block header %}{% endblock %}
         </header>
-        {% for message in get_flashed_messages() %}
-          <div class="flash">{{ message }}</div>
-        {% endfor %}
         {% block content %}{% endblock %}
       </section>
 

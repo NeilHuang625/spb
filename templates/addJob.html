@@ -1,0 +1,20 @@
+{% extends "admin.html" %}
+{% block title %}Add Job{% endblock %}
+{% block header %}Add Job{% endblock %}
+{% block content %}
+
+    <form action="/admin/addjob/{{ customer_id }}" method="post" class="needs-validation" novalidate>
+        <div class="mb-3">
+            <label for="jobDate" class="form-label">Job Date</label>
+
+            <!-- The min attribute is used to set the minimum date that can be selected in the date picker. -->
+            <input type="date" class="form-control" id="jobDate" name="jobDate" required min="{{ today }}">
+            <div class="invalid-feedback">
+                Please select a date (not earlier than today) for the job.
+            </div>
+        </div>
+        <button class="btn btn-primary" type="submit">Add Job</button>
+    </form>
+
+{% endblock %}
+```

@@ -1,0 +1,38 @@
+{% extends "admin.html" %}
+{% block title %}Add Customer{% endblock %}
+{% block header %}Add Customer{% endblock %}
+{% block content %}
+
+    <form action="/admin/addcustomer" method="post" class="needs-validation" novalidate>
+        <div class="mb-3">
+        <label for="firstName" class="form-label">First Name (optional)</label>
+        <input type="text" class="form-control" id="firstName" name="firstName" >
+        <div class="invalid-feedback">
+            Please enter a first name.
+        </div>
+        </div>
+        <div class="mb-3">
+        <label for="familyName" class="form-label">Family Name</label>
+        <input type="text" class="form-control" id="familyName" name="familyName" required>
+        <div class="invalid-feedback">
+            Please enter a last name.
+        </div>
+        </div>
+        <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" class="form-control" id="email" name="email" required >
+        <div class="invalid-feedback">
+            Please enter a valid email address.
+        </div>
+        </div>
+        <div class="mb-3">
+        <label for="phone" class="form-label">Phone</label>
+        <input type="text" class="form-control" id="phone" name="phone" required pattern="^02\d{7,9}$">
+        <div class="invalid-feedback">
+            Please enter a valid phone number starting with '02' and 11 digits long.
+        </div>
+        </div>
+        <button class="btn btn-primary" type="submit">Add Customer</button>
+    </form>
+
+{% endblock %}

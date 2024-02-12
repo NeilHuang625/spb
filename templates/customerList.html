@@ -1,0 +1,36 @@
+{% extends "admin.html" %}
+{% block title %}Admin Page{% endblock %}
+{% block header %}Admin Page{% endblock %}
+{% block content %}
+  <form action="/admin" method="get">
+    <input type="text" name="search" placeholder="Search for customers">
+    <input type="submit" value="Search">
+  </form>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Phone</th>
+        <th scope="col" >Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for customer in customerList %}
+        <tr>
+          <th scope="row">{{ customer[0] }}</th>
+          <td>{{ customer[1] }}</td>
+          <td>{{ customer[2] }}</td>
+          <td>{{ customer[3] }}</td>
+          <td>{{ customer[4] }}</td>
+          <td>
+            <a href="/admin/addjob/{{ customer[0] }}" class="btn btn-primary">Add Job</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <p>{{ message }}</p>
+{% endblock %}
