@@ -3,7 +3,8 @@
 [TOCM]
 
 [TOC]
-##Web application structure
+
+## Web application structure
 ### Technician Interface
 #### `base.html`
 Boilerplate for currentjobslist.html and job_details.html
@@ -21,7 +22,7 @@ Obtain database information through the route `/jobdetails/<job_id>` get method,
 Add parts and services to the specified job through the route `/jobdetails/<job_id>` post method, and update the completion status of the job through the same route through the button "marked as completed".
 
 ------------
-###Admin Interface
+### Admin Interface
 #### `admin.html`
 Boilerplate for all templates that are not technician
 
@@ -51,10 +52,51 @@ Rendered through route `/admin/unpaidBills` and pass `bills` to it. Each custome
 Render through route `/admin/reports` and pass the `bills` to it, and the specific job is marked in red.
 
 ------------
-##Design decisions
-##Database questions:
-### Question1
-### Question2
-### Question3
-### Question4
-### Question5
+## Design decisions
+The naming of routes is the focus of my design. Good route naming principles can reflect its functions more clearly, thereby improving the efficiency of writing code. For example, in this project, all routes starting with `/admin` are interfaces related to admin. I like to use `if` statements to use get and post methods in the same route. Firstly, it is easy to distinguish them through `if` statements, and secondly, their functions are closely related to the route names. For example, through route `/admin/addcustomer`, the get method is to render the template for adding a new customer, and the post method is to add a new customer. Similarly, I merge add part and add service and use route `/jobdetails/<job_id>` to process them together, because they are closely related to a specific job.
+
+In addition, I copied the boilerplate `admin.html` that are almost the same as `base.html` for the admin interface. This completely separates the boilerplate used by technician and admin, and also makes the file naming more meaningful.
+
+In terms of page layout design, I keep the style of the page consistent, which is more conducive to the continued development and management of the web page. Using bootstrap, I designed them to be devices responsive. When the screen size reaches a certain level, the navbar will collapse and become a button, making the page easier to navigate and use.
+
+In terms of form validation, I validate each field of the table strictly according to the data type of the database to ensure that the system will not crash due to inappropriate data types.
+## Database questions:
+### Answer to Question1
+
+
+    CREATE TABLE IF NOT EXISTS job
+    (
+    job_id INT auto_increment PRIMARY KEY NOT NULL,
+    job_date date NOT NULL,
+    customer int NOT NULL,
+    total_cost decimal(6,2) default null,
+    tiny completedint default 0,
+    paid tinyint default 0,
+    
+    FOREIGN KEY (customer) REFERENCES customer(customer_id)
+    ON UPDATE CASCADE
+    );
+### Answer to Question2
+
+
+    FOREIGN KEY (customer) REFERENCES customer(customer_id)
+### Answer to Question3
+
+
+    INSERT INTO part (`part_name`, `cost`) VALUES ('Windscreen', '560.65');
+    INSERT INTO part (`part_name`, `cost`) VALUES ('Headlight', '35.65');
+    INSERT INTO part (`part_name`, `cost`) VALUES ('Wiper blade', '12.43');
+    INSERT INTO part (`part_name`, `cost`) VALUES ('Left fender', '260.76');
+    INSERT INTO part (`part_name`, `cost`) VALUES ('Right fender', '260.76');
+    INSERT INTO part (`part_name`, `cost`) VALUES ('Tail light', '120.54');
+    INSERT INTO part (`part_name`, `cost`) VALUES ('Hub Cap', '22.89');
+
+### Answer to Question4
+In the `job_part` table, add new column `added_time`, and set the data type to be `DATETIME`.
+
+### Answer to Question5
+In a team, a clear division of labor for each position can improve the work efficiency of the entire team. The technician is responsible for auto repairing, and they know best what parts and services are used in a job. Similarly, the admin can quickly obtain relevant information from other departments. For example, the company has purchased new parts that need to be stored in the database and update the system's part options. If all functions of the system are accessible to people in all positions, many other problems will arise:
+
+1. Data Privacy: Technicians and office administrators often have different roles and responsibilities within an organization. Allowing them different routes of access ensures that sensitive information is protected and only accessible by authorized personnel. For example: If all facilities are available to everyone, technicians may inadvertently access confidential office management data, such as financial records or employee information, compromising data privacy and security.
+
+2. Workflow efficiency and task management: Providing access to specific routes customized for each role helps streamline workflow and improve task management. For example: Technicians may need access to routes designed specifically for managing service requests, updating job status, or accessing technical documentation related to their tasks. Allowing them access to only these routes ensures they can perform their job responsibilities effectively without having to navigate unrelated functions.
