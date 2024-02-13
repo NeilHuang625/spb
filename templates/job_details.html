@@ -37,7 +37,7 @@
         </div>
         <div class="mb-3">
             <label for="part_qty" class="form-label">Quantity:</label>
-            <input type="number" name="part_qty" id="part_qty" min="1" class="form-control" {{ disable }} required>
+            <input type="number" name="part_qty" id="part_qty" min="1" max="10" class="form-control" {{ disable }} required>
         </div>
         <button type="submit" class="btn btn-primary" {{ disable }}>Add Part</button>
     </form>
@@ -54,7 +54,7 @@
         </div>
         <div class="mb-3">
             <label for="service_qty" class="form-label">Service Quantity:</label>
-            <input type="number" name="service_qty" id="service_qty" min="1" class="form-control" {{ disable }} required>
+            <input type="number" name="service_qty" id="service_qty" min="1" max="10" class="form-control" {{ disable }} required>
         </div>
         <button type="submit" class="btn btn-primary" {{ disable }}>Add Service</button>
     </form>
