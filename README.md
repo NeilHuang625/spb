@@ -1,8 +1,27 @@
-**Table of Contents**
 
-[TOC]
+- [Web application structure](#web-application-structure)
+  - [Technician Interface](#technician-interface)
+    - [`base.html`](#basehtml)
+    - [`currentjobslist.html`](#currentjobslisthtml)
+    - [`job_details.html`](#job_detailshtml)
+    - [`addPart.html` and `addService.html`](#addparthtml-and-addservicehtml)
+  - [Admin Interface](#admin-interface)
+    - [`admin.html`](#adminhtml)
+    - [`customerList.html`](#customerlisthtml)
+    - [`partList.html and serviceList.html`](#partlisthtml-and-servicelisthtml)
+    - [`addPart.html and addService.html`](#addparthtml-and-addservicehtml-1)
+    - [`addCustomer.html`](#addcustomerhtml)
+    - [`unpaidBills.html`](#unpaidbillshtml)
+    - [`report.html`](#reporthtml)
+- [Design decisions](#design-decisions)
+- [Database questions:](#database-questions)
+  - [Answer to Question1](#answer-to-question1)
+  - [Answer to Question2](#answer-to-question2)
+  - [Answer to Question3](#answer-to-question3)
+  - [Answer to Question4](#answer-to-question4)
+  - [Answer to Question5](#answer-to-question5)
 
-[TOC]
+
 
 ## Web application structure
 ### Technician Interface
