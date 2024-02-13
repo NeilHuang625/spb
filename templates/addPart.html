@@ -1,25 +1,29 @@
 {% extends "admin.html" %}
 {% block title %}Add Part{% endblock %}
 {% block content %}
-
+<div class="container">
     <h2 class="mb-3">Add Part</h2>
     <form action="/admin/addpart" method="post" class="needs-validation" novalidate>
-        <div class="mb-3">
-        <label for="partName" class="form-label">Part Name</label>
-        <input type="text" class="form-control" id="partName" name="partName" required>
-        <div class="invalid-feedback">
-            Please enter a part name.
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="mb-3">
+                    <label for="partName" class="form-label">Part Name</label>
+                    <input type="text" class="form-control" id="partName" name="partName" required>
+                    <div class="invalid-feedback">
+                        Please enter a part name.
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="partCost" class="form-label">Part Cost</label>
+                    <input type="text" class="form-control" id="partCost" name="partCost" required pattern="^\d{1,3}(\.\d{1,2})?$">
+                    <div class="invalid-feedback">
+                        Please enter a part price with up to 3 digits before the decimal point and 2 digits after the decimal point.
+                    </div>
+                </div>
+                <button class="btn btn-primary" type="submit">Add Part</button>
         </div>
-        </div>
-        <div class="mb-3">
-        <label for="partCost" class="form-label">Part Cost</label>
-        <input type="text" class="form-control" id="partCost" name="partCost" required pattern="^\d{1,3}(\.\d{1,2})?$" >
-        <div class="invalid-feedback">
-            Please enter a part price with up to 3 digits before the decimal point and 2 digits after the decimal point.
-        </div>
-        </div>
-        <button class="btn btn-primary" type="submit">Add Part</button>
     </form>
+</div>
 
 {% endblock %}
 ```
