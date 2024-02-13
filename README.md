@@ -1,4 +1,4 @@
-
+**Table of Contents**
 - [Web application structure](#web-application-structure)
   - [Technician Interface](#technician-interface)
     - [`base.html`](#basehtml)
